@@ -1,0 +1,56 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/2d372b80-2c47-4e3f-b7fb-61e06e2e7df8/ # baseUri: http://api.icraftsoft.net:6060
+title: Abiti Bekele Capstone Project 
+version: 1.0
+
+types:
+  user: !include DataType/dataType.raml
+
+/Users:
+  get:
+    description: "get the list of all users"
+    responses:
+      200:
+        body:
+          application/json:
+            type: user[]
+            example: !include Example/getallusers.raml
+                
+  post:
+    description: "Create a new user to add to the user list"
+    responses:
+      201:
+        body:
+          application/json:
+            type: user[]             
+            example: !include Example/post.raml
+  /{id}:
+      get:
+        responses:
+          200:
+            body:
+              application/json:                         
+                example: !include Example/getById.raml     
+  put:
+      description: "update user list"
+      body:
+        application/json:
+          type: user[]
+          example: !include Example/put.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example: {"message": "successfully updated"}   
+  delete:
+      description: "Delete user"
+      queryParameters:
+        id: 
+          required: true
+          type: integer                          
+              
+      responses:
+        200:
+          body:
+            application/json:
+             example: {"msg": "User is Succeessfully deleted"}
